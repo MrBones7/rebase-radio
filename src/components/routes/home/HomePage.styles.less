@@ -11,7 +11,7 @@
   background: transparent;
   box-sizing: border-box;
   width: 0;
-  height: 50px;
+  height: 30px;
 
   border-color: transparent transparent transparent #ddd;
   transition: 100ms all ease;
@@ -23,11 +23,11 @@
 
   /* play state */
   border-style: solid;
-  border-width: 25px 0 25px 40px;
+  border-width: 15px 0 15px 25px;
 
   &.paused {
     border-style: double;
-    border-width: 0px 0 0px 45px;
+    border-width: 0px 0 0px 26px;
   }
 
   &:hover {
@@ -39,10 +39,6 @@
   margin: 0 0 50px 50px;
 }
 
-@media only screen and (max-width: 768px) {
-.overlay { height: 90vh; }
-}
-
 .nav {
   width: 100%;
   display: flex;
@@ -50,6 +46,13 @@
   flex-grow: 1;
   justify-content: space-between;
   padding: 20px;
+}
+
+.homeNav {
+  img { 
+    width: 32px;
+    height: auto;
+  }
 }
 
 .contactNav {
