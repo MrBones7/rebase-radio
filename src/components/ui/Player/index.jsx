@@ -6,7 +6,7 @@ import Slider from '@material-ui/core/Slider';
 import { withStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faVolumeDown, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
-import { playerControls, togglePlay, slider, icon, iconHoverable, volumeSlider } from './Player.styles.less';
+import { player, playerControls, playerInfo, togglePlay, slider, icon, iconHoverable, volumeSlider } from './Player.styles.less';
 
 const radioSrc = 'https://s4.radio.co/sb5955894a/listen';
 
@@ -97,6 +97,14 @@ PlayerControls.propTypes = {
   initialVolume: PropTypes.number,
 };
 
+const PlayerInfo = () => {
+  const message = '~ * You will always be welcome here * ~';
+
+  return (
+    <div className={playerInfo}><p>{message}</p></div>
+  );
+};
+
 class Player extends React.Component {
   constructor(props) {
     super(props);
@@ -113,13 +121,14 @@ class Player extends React.Component {
     const initialVolume = 0.6;
 
     return (
-      <div>
+      <div className={player}>
         <PlayerControls
           onPause={onPause}
           onPlay={onPlay}
           setVolume={setVolume}
           initialVolume={initialVolume}
         />
+        <PlayerInfo />
         <ReactAudioPlayer
           src={radioSrc}
           controls
