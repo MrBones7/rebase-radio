@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faVolumeDown, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
 import { player, playerControls, playerInfo, togglePlay, slider, icon, iconHoverable, volumeSlider } from './Player.styles.less';
+import { title as siteTitle } from '../../../../settings';
 
 const StyledSlider = withStyles({
   root: {
@@ -108,12 +109,16 @@ PlayerControls.propTypes = {
   initialVolume: PropTypes.number,
 };
 
-const TrackInfo = ({ title, artwork_url }) => (
-  <div>
-    <img src={artwork_url} alt={`${title} album artwork`} />
-    <p>{title}</p>
-  </div>
-);
+const TrackInfo = ({ title, artwork_url }) => {
+  document.title = `${title} | ${siteTitle}`;
+
+  return (
+    <div>
+      <img src={artwork_url} alt={`${title} album artwork`} />
+      <p>{title}</p>
+    </div>
+  );
+};
 
 TrackInfo.propTypes = {
   title: PropTypes.string.isRequired,
