@@ -98,7 +98,7 @@ PlayerControls.propTypes = {
 };
 
 const PlayerInfo = () => {
-  const message = '~ * You will always be welcome here * ~';
+  const message = 'Song | Artist';
 
   return (
     <div className={playerInfo}><p>{message}</p></div>
@@ -122,13 +122,13 @@ class Player extends React.Component {
 
     return (
       <div className={player}>
+        <PlayerInfo />
         <PlayerControls
           onPause={onPause}
           onPlay={onPlay}
           setVolume={setVolume}
           initialVolume={initialVolume}
         />
-        <PlayerInfo />
         <ReactAudioPlayer
           src={radioSrc}
           controls
