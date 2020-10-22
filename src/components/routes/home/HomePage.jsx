@@ -7,6 +7,7 @@ import BackgroundVideo from '../../ui/BackgroundVideo';
 
 const backgroundVideoSrc = 'https://github.com/rbubs/rebase-radio/raw/master/static-assets/background.mp4';
 const posterSrc = 'https://github.com/rbubs/rebase-radio/raw/master/static-assets/poster.jpg';
+const stationId = 'sb5955894a';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class HomePage extends React.Component {
       <div className={content}>
         <div className={overlay}>
           <Nav />
-          <Player />
+          <Player initialVolume={0.6} stationId={stationId} />
         </div>
         <BackgroundVideo videoSrc={backgroundVideoSrc} posterSrc={posterSrc} />
       </div>

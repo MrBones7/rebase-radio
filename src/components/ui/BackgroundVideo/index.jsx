@@ -5,7 +5,15 @@ import { fullwidthContainer, fullwidthVideo, wrapperFullwidthVideo } from './Bac
 const BackgroundVideo = ({ videoSrc, posterSrc }) => (
   <div className={fullwidthContainer}>
     <div className={wrapperFullwidthVideo}>
-      <video loop muted playsInline autoPlay poster={posterSrc} className={fullwidthVideo}>
+      <video
+        loop
+        muted
+        disablePictureInPicture
+        playsInline
+        autoPlay
+        poster={posterSrc}
+        className={fullwidthVideo}
+      >
         <source src={videoSrc} type="video/mp4" />
         <img src={posterSrc} alt="Your browser does not support the video element" />
       </video>
