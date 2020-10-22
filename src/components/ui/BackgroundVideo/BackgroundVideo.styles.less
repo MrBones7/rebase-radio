@@ -1,0 +1,37 @@
+.fullwidthContainer {
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  font-weight: normal;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+
+.wrapperFullwidthVideo {
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+@supports (display: flex) {
+.wrapperFullwidthVideo { display: flex; }
+}
+
+.fullwidthVideo {
+  margin: 0px auto;
+  background-color: rgb(233, 233, 233);
+  padding: 0px;
+  position: inherit;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+}
