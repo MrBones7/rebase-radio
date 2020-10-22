@@ -31,7 +31,7 @@ const PlayerControls = ({ onPlay, onPause }) => {
 
 const Nav = () => (
   <div className={nav}>
-    <a href="/" className={homeNav}>
+    <a href="#" className={homeNav}>
       <img src={faviconSrc} alt="Home" />
     </a>
     <a href="mailto:bones@rebase.radio" target="_blank" rel="noopener noreferrer" className={contactNav}>Contact</a>
@@ -69,6 +69,7 @@ class HomePage extends React.Component {
             src={radioSrc}
             controls
             preload
+            style={{ display: 'none' }}
             ref={(element) => { this.player = element; }}
           />
         </div>
