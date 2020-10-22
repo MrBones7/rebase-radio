@@ -2,11 +2,10 @@
 import React from 'react';
 import { overlay, content, fullwidthContainer, fullwidthVideo, wrapperFullwidthVideo } from './HomePage.styles.less';
 
-import PosterImage from './poster.jpg';
-
 export default function HomePage() {
   const faviconSrc = 'https://github.com/rbubs/rebase-radio/raw/master/static-assets/favicon.png';
   const backgroundVideoSrc = 'https://github.com/rbubs/rebase-radio/raw/master/static-assets/background.mp4';
+  const posterSrc = 'https://github.com/rbubs/rebase-radio/raw/master/static-assets/poster.jpg';
 
   const homeLinkStyle = {
     position: 'absolute',
@@ -36,9 +35,9 @@ export default function HomePage() {
   const VideoBackground = (
     <div className={fullwidthContainer}>
       <div className={wrapperFullwidthVideo}>
-        <video loop muted autoPlay poster={PosterImage} className={fullwidthVideo}>
+        <video loop muted autoPlay poster={posterSrc} className={fullwidthVideo}>
           <source src={backgroundVideoSrc} type="video/mp4" />
-          <img src={PosterImage} alt="Your browser does not support the video element" />
+          <img src={posterSrc} alt="Your browser does not support the video element" />
         </video>
       </div>
     </div>
