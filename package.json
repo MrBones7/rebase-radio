@@ -9,7 +9,7 @@
     "start": "webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack --progress --colors",
     "deploy": "npm run build && gh-pages -d dist",
-    "lint": "eslint src --ext .js --ext .jsx"
+    "lint": "eslint src --ext .js --ext .jsx --fix"
   },
   "browserslist": [
     "last 2 version"
@@ -31,6 +31,7 @@
     "open-color": "^1.7.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-audio-player": "^0.14.0",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
     "react-router-dom": "^5.2.0",

@@ -6,13 +6,33 @@
   flex-flow: column;
 }
 
-.player {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 20px 20px 100px;
+.button {
+  border: 0;
+  background: transparent;
+  box-sizing: border-box;
+  width: 0;
+  height: 74px;
+
+  border-color: transparent transparent transparent orange;
+  transition: 100ms all ease;
+  cursor: pointer;
+
+  // play state
+  border-style: solid;
+  border-width: 37px 0 37px 60px;
+
+  &.paused {
+    border-style: double;
+    border-width: 0px 0 0px 60px;
+  }
+
+  &:hover {
+    border-color: transparent transparent transparent darkgoldenrod;
+  }
+}
+
+.playerControls {
+  margin: 0 auto 50px;
 }
 
 @media only screen and (max-width: 768px) {
