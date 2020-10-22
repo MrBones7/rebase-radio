@@ -162,14 +162,6 @@ module.exports = {
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
             <title>${settings.title}</title>
-          </head>
-          <body>
-            <noscript>
-              Enable JavaScript to use
-            </noscript>
-
-            <div id="app"></div>
-            ${htmlWebpackPlugin.tags.bodyTags}
 
             <!-- Hack to get 100vh working on ios Safari -->
             <script>
@@ -178,10 +170,19 @@ module.exports = {
                 console.log('--vh', vh+'px');
                 document.documentElement.style.setProperty('--vh', vh+'px');
               };
-              
+
+              setVh();
               window.addEventListener('load', setVh);
               window.addEventListener('resize', setVh);
             </script>
+          </head>
+          <body>
+            <noscript>
+              Enable JavaScript to use
+            </noscript>
+
+            <div id="app"></div>
+            ${htmlWebpackPlugin.tags.bodyTags}
           </body>
         </html>
       `,
