@@ -170,6 +170,18 @@ module.exports = {
 
             <div id="app"></div>
             ${htmlWebpackPlugin.tags.bodyTags}
+
+            <!-- Hack to get 100vh working on ios Safari -->
+            <script>
+              const setVh = function() {
+                const vh = window.innerHeight * 0.01;
+                console.log('--vh', vh+'px');
+                document.documentElement.style.setProperty('--vh', vh+'px');
+              };
+              
+              window.addEventListener('load', setVh);
+              window.addEventListener('resize', setVh);
+            </script>
           </body>
         </html>
       `,
