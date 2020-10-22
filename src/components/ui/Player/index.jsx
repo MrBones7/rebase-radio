@@ -61,8 +61,10 @@ const TogglePlayButton = ({ onClick, isPlaying }) => (
   />
 );
 
-const PlayerControls = ({ onPlay, onPause, setVolume, initialVolume = 0.6 }) => {
+const PlayerControls = ({ canPlay, onPlay, onPause, setVolume, initialVolume = 0.6 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+
+  if (!canPlay) return null;
 
   const togglePlayHandler = () => {
     if (isPlaying) {
@@ -108,25 +110,31 @@ const PlayerInfo = () => {
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    this.player = null;
+    this.playerRef;
+    this.state = {};
+  }
+
+  playerEl() { this.playerRef && this.playerRef.audioEl.current; }
+
+  onPlay() { this.playerEl() && this.playerEl().play(); }
+
+  onPause() { this.playerEl() && this.playerEl().pause(); }
+
+  setVolume(volume) {
+    if (this.playerEl()) this.playerEl().volume = volume;
   }
 
   render() {
-    const playerEl = () => this.player && this.player.audioEl.current;
-
-    const onPlay = () => playerEl() && playerEl().play();
-    const onPause = () => playerEl() && playerEl().pause();
-    const setVolume = volume => { if (playerEl()) playerEl().volume = volume; };
-
     const initialVolume = 0.6;
 
     return (
       <div className={player}>
         <PlayerInfo />
         <PlayerControls
-          onPause={onPause}
-          onPlay={onPlay}
-          setVolume={setVolume}
+          onPause={() => this.onPause()}
+          onPlay={() => this.onPlay()}
+          setVolume={(volume) => this.setVolume(volume)}
+          canPlay
           initialVolume={initialVolume}
         />
         <ReactAudioPlayer
@@ -134,7 +142,7 @@ class Player extends React.Component {
           controls
           volume={initialVolume}
           style={{ display: 'none' }}
-          ref={(element) => { this.player = element; }}
+          ref={(el) => { this.playerRef = el; }}
         />
       </div>
     );
