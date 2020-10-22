@@ -54,9 +54,11 @@ const VolumeSlider = ({ onChange, initialVolume }) => {
 };
 
 const TogglePlayButton = ({ onClick, isPlaying }) => (
-  <button type="button" onClick={onClick} className={togglePlay}>
-    <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} className={cx(icon, iconHoverable)} />
-  </button>
+  <FontAwesomeIcon
+    onClick={onClick}
+    icon={isPlaying ? faPause : faPlay}
+    className={cx(togglePlay, icon, iconHoverable)}
+  />
 );
 
 const PlayerControls = ({ onPlay, onPause, setVolume, initialVolume = 0.6 }) => {
