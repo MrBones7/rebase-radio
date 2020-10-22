@@ -2,14 +2,67 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactAudioPlayer from 'react-audio-player';
 import cx from 'classnames';
-import { playerControls, button, paused } from './Player.styles.less';
+import Slider from '@material-ui/core/Slider';
+import { withStyles } from '@material-ui/core/styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faPause, faVolumeDown, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
+import { playerControls, togglePlay, slider, icon, iconHoverable, volumeSlider } from './Player.styles.less';
 
 const radioSrc = 'https://s4.radio.co/sb5955894a/listen';
 
-const PlayerControls = ({ onPlay, onPause }) => {
+const StyledSlider = withStyles({
+  root: {
+    color: '#ddd',
+    width: 100,
+  },
+  thumb: {
+    height: 12,
+    width: 12,
+    backgroundColor: '#eee',
+    marginTop: -4,
+    '&:focus, &:hover, &$active': {
+      boxShadow: 'none',
+    },
+  },
+  track: {
+    height: 4,
+    borderRadius: 4,
+    margin: '0 30',
+  },
+  rail: {
+    height: 4,
+    borderRadius: 4,
+    margin: '0 30',
+  },
+})(Slider);
+
+const VolumeSlider = ({ onChange, initialVolume }) => {
+  const [value, setValue] = React.useState(initialVolume * 100.0);
+
+  const handleChange = (event, newValue) => {
+    onChange(newValue / 100.0); // volume values must be between 0 and 1
+    setValue(newValue);
+  };
+
+  return (
+    <div className={volumeSlider}>
+      <FontAwesomeIcon icon={faVolumeDown} className={icon} />
+      <StyledSlider value={value} className={slider} onChange={handleChange} aria-labelledby="continuous-slider" />
+      <FontAwesomeIcon icon={faVolumeUp} className={icon} />
+    </div>
+  );
+};
+
+const TogglePlayButton = ({ onClick, isPlaying }) => (
+  <button type="button" onClick={onClick} className={togglePlay}>
+    <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} className={cx(icon, iconHoverable)} />
+  </button>
+);
+
+const PlayerControls = ({ onPlay, onPause, setVolume, initialVolume = 0.6 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const togglePlay = () => {
+  const togglePlayHandler = () => {
     if (isPlaying) {
       onPause();
       setIsPlaying(false);
@@ -21,15 +74,16 @@ const PlayerControls = ({ onPlay, onPause }) => {
 
   useEffect(() => {
     const eventType = 'keydown';
-    const eventHandler = ({ key }) => key === ' ' && togglePlay();
-    
+    const eventHandler = ({ key }) => key === ' ' && togglePlayHandler();
+
     window.addEventListener(eventType, eventHandler);
     return () => window.removeEventListener(eventType, eventHandler);
   });
 
   return (
     <div className={playerControls}>
-      <button onClick={togglePlay} className={isPlaying ? cx(button, paused) : cx(button)} />
+      <TogglePlayButton onClick={togglePlayHandler} isPlaying={isPlaying} />
+      <VolumeSlider onChange={setVolume} initialVolume={initialVolume} />
     </div>
   );
 };
@@ -37,6 +91,8 @@ const PlayerControls = ({ onPlay, onPause }) => {
 PlayerControls.propTypes = {
   onPlay: PropTypes.func.isRequired,
   onPause: PropTypes.func.isRequired,
+  setVolume: PropTypes.func.isRequired,
+  initialVolume: PropTypes.number,
 };
 
 class Player extends React.Component {
@@ -47,15 +103,25 @@ class Player extends React.Component {
 
   render() {
     const playerEl = () => this.player && this.player.audioEl.current;
+
     const onPlay = () => playerEl() && playerEl().play();
     const onPause = () => playerEl() && playerEl().pause();
+    const setVolume = volume => { if (playerEl()) playerEl().volume = volume; };
+
+    const initialVolume = 0.6;
 
     return (
       <div>
-        <PlayerControls onPause={onPause} onPlay={onPlay} />
+        <PlayerControls
+          onPause={onPause}
+          onPlay={onPlay}
+          setVolume={setVolume}
+          initialVolume={initialVolume}
+        />
         <ReactAudioPlayer
           src={radioSrc}
           controls
+          volume={initialVolume}
           style={{ display: 'none' }}
           ref={(element) => { this.player = element; }}
         />
