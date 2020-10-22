@@ -1,33 +1,47 @@
-
-// Fullscreen video styling
-.fullscreenBg {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-  z-index: -100;
+.overlay {
+  position: relative;
+  z-index: 2;
 }
 
-.fullscreenBgVideo {
+.content {
+  position: relative;
+  clear: both;
+  margin: 0 auto;
+}
+
+.fullwidthContainer {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  font-weight: normal;
+  overflow: hidden;
+}
+
+.wrapperFullwidthVideo {
+  height: 100vh;
   position: absolute;
   top: 0;
-  left: 0;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 100%;
 }
 
-@media (min-aspect-ratio: 16/9) {
-  .fullscreenBgVideo {
-    height: 400%;
-    top: -150%;
-  }
+@supports (display: flex) {
+.wrapperFullwidthVideo { display: flex; }
 }
 
-@media (max-aspect-ratio: 16/9) {
-  .fullscreenBgVideo {
-    width: 400%;
-    left: -150%;
-  }
+.fullwidthVideo {
+  margin: 0px auto;
+  background-color: rgb(233, 233, 233);
+  padding: 0px;
+  position: inherit;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
 }
