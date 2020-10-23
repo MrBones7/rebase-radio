@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import queryString from 'query-string';
 import PropTypes from 'prop-types';
 import ReactAudioPlayer from 'react-audio-player';
 import cx from 'classnames';
@@ -6,7 +7,7 @@ import Slider from '@material-ui/core/Slider';
 import { withStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faVolumeDown, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
-import { player, playerControls, playerInfo, togglePlay, slider, icon, iconHoverable, volumeSlider } from './Player.styles.less';
+import { player, playerControls, playerInfo, trackLink, togglePlay, slider, icon, iconHoverable, volumeSlider } from './Player.styles.less';
 import { title as siteTitle } from '../../../../settings';
 
 const StyledSlider = withStyles({
@@ -112,10 +113,12 @@ PlayerControls.propTypes = {
 const TrackInfo = ({ title, artwork_url }) => {
   document.title = `${title} | ${siteTitle}`;
 
+  const params = queryString.stringify({ search_query: title });
+  const searchUrl = `https://www.youtube.com/results?${params}`;
+
   return (
     <div>
-      {/*<img src={artwork_url} alt={`${title} album artwork`} />*/}
-      <p>{title}</p>
+      <p><a className={trackLink} href={searchUrl} target="_blank" rel="noopener noreferrer">{title}</a></p>
     </div>
   );
 };
@@ -165,14 +168,8 @@ class Player extends React.Component {
     this.state = {};
   }
 
-  playerEl() { this.playerRef && this.playerRef.audioEl.current; }
-
-  onPlay() { this.playerEl() && this.playerEl().play(); }
-
-  onPause() { this.playerEl() && this.playerEl().pause(); }
-
-  setVolume(volume) {
-    if (this.playerEl()) this.playerEl().volume = volume;
+  playerEl() {
+    return this.playerRef && this.playerRef.audioEl.current;
   }
 
   render() {
@@ -181,14 +178,20 @@ class Player extends React.Component {
     const radioSrc = `https://s4.radio.co/${stationId}/listen`;
     const radioStatusUrl = `https://public.radio.co/stations/${stationId}/status`;
 
+    const onPlay = () => { this.playerEl() && this.playerEl().play(); };
+
+    const onPause = () => { this.playerEl() && this.playerEl().pause(); };
+
+    const setVolume = volume => { if (this.playerEl()) this.playerEl().volume = volume; };
+
     return (
       <div className={player}>
 
         <PlayerInfo statusUrl={radioStatusUrl} />
         <PlayerControls
-          onPause={() => this.onPause()}
-          onPlay={() => this.onPlay()}
-          setVolume={(volume) => this.setVolume(volume)}
+          onPause={onPause}
+          onPlay={onPlay}
+          setVolume={setVolume}
           canPlay
           initialVolume={initialVolume}
         />
