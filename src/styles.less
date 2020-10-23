@@ -1,3 +1,6 @@
+@primary-color: #ddd;
+@secondary-color: #ccc;
+
 @import url(https://fonts.googleapis.com/css?family=Raleway:500&family=VT323&display=swap);
 
 html {
@@ -24,4 +27,35 @@ body {
 html, body {
   height: 100%;
   width: 100%;
+}
+
+.trackLink {
+  color: @primary-color;
+  text-decoration: none;
+
+  &:hover {
+    color: @secondary-color;
+  }
+}
+
+.primaryColor {
+  color: @primary-color;
+}
+
+p {
+  font-family: 'VT323', monospace;
+  color: @primary-color;
+}
+
+a, .hoverable {
+  text-decoration: none;
+  -webkit-transition: color 0.5s; /* For Safari 3.0 to 6.0 */
+  transition: color 0.5s; /* For modern browsers */
+  font-family: 'VT323', monospace;
+  color: @primary-color;
+
+  &:hover {
+    cursor: pointer;
+    color: @secondary-color;
+  }
 }

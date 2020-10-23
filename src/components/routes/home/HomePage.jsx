@@ -9,6 +9,8 @@ const backgroundVideoSrc = 'https://github.com/rbubs/rebase-radio/raw/master/sta
 const posterSrc = 'https://github.com/rbubs/rebase-radio/raw/master/static-assets/poster.jpg';
 const stationId = 'sb5955894a';
 
+const Spacer = () => <div style={{ flexGrow: 1 }} />;
+
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -20,6 +22,7 @@ class HomePage extends React.Component {
       <div className={content}>
         <div className={overlay}>
           <Nav />
+          <Spacer />
           <Player initialVolume={0.6} stationId={stationId} />
         </div>
         <BackgroundVideo videoSrc={backgroundVideoSrc} posterSrc={posterSrc} />

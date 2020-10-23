@@ -7,7 +7,8 @@ import Slider from '@material-ui/core/Slider';
 import { withStyles } from '@material-ui/core/styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faPause, faVolumeDown, faVolumeUp } from '@fortawesome/free-solid-svg-icons';
-import { player, playerControls, playerInfo, trackLink, togglePlay, slider, icon, iconHoverable, volumeSlider } from './Player.styles.less';
+import { player, playerControls, playerInfo, trackLink, togglePlay, slider, volumeSlider } from './Player.styles.less';
+import { hoverable, primaryColor } from '../../../styles.less';
 import { title as siteTitle } from '../../../../settings';
 
 const StyledSlider = withStyles({
@@ -46,9 +47,9 @@ const VolumeSlider = ({ onChange, initialVolume }) => {
 
   return (
     <div className={volumeSlider}>
-      <FontAwesomeIcon icon={faVolumeDown} className={icon} />
+      <FontAwesomeIcon icon={faVolumeDown} className={primaryColor} />
       <StyledSlider value={value} className={slider} onChange={handleChange} aria-labelledby="continuous-slider" />
-      <FontAwesomeIcon icon={faVolumeUp} className={icon} />
+      <FontAwesomeIcon icon={faVolumeUp} className={primaryColor} />
     </div>
   );
 };
@@ -62,7 +63,7 @@ const TogglePlayButton = ({ onClick, isPlaying }) => (
   <FontAwesomeIcon
     onClick={onClick}
     icon={isPlaying ? faPause : faPlay}
-    className={cx(togglePlay, icon, iconHoverable)}
+    className={cx(togglePlay, primaryColor, hoverable)}
   />
 );
 
