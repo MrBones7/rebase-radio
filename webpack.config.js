@@ -173,6 +173,7 @@ module.exports = {
 
               setVh();
               window.addEventListener('load', setVh);
+              window.addEventListener('orientationchange', setVh);
               window.addEventListener('resize', setVh);
             </script>
           </head>
