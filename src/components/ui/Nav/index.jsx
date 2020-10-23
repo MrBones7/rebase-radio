@@ -7,7 +7,7 @@ const Nav = () => {
   return (
     <div className={nav}>
       <a href={rootUrl} className={homeNav}>rebase radio</a>
-      <a href="mailto:bones@rebase.radio" target="_blank" rel="noopener noreferrer" className={contactNav}>Contact</a>
+      <a href="mailto:bones@rebase.radio" target="_blank" rel="noopener noreferrer" className={contactNav}>contact</a>
     </div>
   );
 };
