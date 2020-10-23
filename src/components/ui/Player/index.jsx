@@ -114,7 +114,7 @@ const TrackInfo = ({ title, artwork_url }) => {
 
   return (
     <div>
-      <img src={artwork_url} alt={`${title} album artwork`} />
+      {/*<img src={artwork_url} alt={`${title} album artwork`} />*/}
       <p>{title}</p>
     </div>
   );
